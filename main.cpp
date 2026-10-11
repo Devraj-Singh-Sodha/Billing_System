@@ -7,6 +7,115 @@ using namespace std;
 string filename = "product.txt";
 ofstream data_product (filename, ios::app);
 
+class Card{
+    public:
+    void proceed_card(double amount){
+
+        double value;
+        string card_no;
+        int pin;
+        
+        cout << "Enter Card Number: ";
+        cin >> card_no;
+        cout << "Enter The Amount: ";
+        cin >> value;
+        
+        
+        while (amount != value)
+        {
+            cout << "Amount Is Not Correct "<< endl
+                 << "Try Again " << endl;
+            cin >> value;
+        }
+        
+        
+        cout << "Enter The Pin: " ;
+        cin >> pin;
+        
+        cout << "Payment Was Recieved ...." << endl
+             << "Visit Again....."<< endl; 
+        
+    }
+};
+
+
+class Upi{
+    public:
+
+    void proceed_upi(double amount){
+
+        double value;
+        string upi_id;
+        int pin;
+        
+        cout << "Enter Upi Id: ";
+        cin >> upi_id;
+        cout << "Enter The Amount: ";
+        cin >> value;
+        
+        
+        while (amount != value)
+        {
+            cout << "Amount Is Not Correct "<< endl
+                 << "Try Again " << endl;
+            cin >> value;
+        }
+        
+        
+        cout << "Enter The Pin: " ;
+        cin >> pin;
+        
+        cout << "Payment Was Recieved ...." << endl
+             << "Visit Again....."<< endl; 
+        
+    }
+};
+
+class Payment : public Upi , Card{
+    public:
+    double amount;
+        void getMethod(double amount){
+            int choice;
+            int value;
+            this->amount = amount;
+            cout << "1. CASH: " << endl
+                 << "2. UPI:  " << endl
+                 << "3. CARD: " << endl;
+
+            cin >> choice;
+
+            if (choice == 1)
+            {
+                cout << "Enter The amount: ";
+                cin >> value;
+
+                 while (amount != value)
+                {
+                    cout << "Amount Is Not Correct "<< endl
+                         << "Try Again " << endl;
+                    cin >> value;
+                }
+        
+                cout << "Payment Was Recieved ...." << endl
+                    << "Visit Again....."<< endl; 
+        
+            }
+
+            else if (choice == 2)
+            {
+                proceed_upi( amount);
+            }
+            else if (choice == 3)
+            {
+                proceed_card( amount);
+            }
+            else{
+                cout << "Invalid choice : " << endl;
+            }
+        }
+        
+
+    };
 class Product{    
     public:
         string name;
@@ -123,34 +232,11 @@ class Billing{
                   
             order<< "Total Price = " << total;
 
-            // Payment payment;
-            // payment.make_payment();
+            Payment payment;
+            payment.getMethod(total);
             
         }
 };
-class Payment{
-    public:
-        string upi_id;
-        int pin;
-        void upi(){
-            cout << "Enter your UPI ID" << endl;
-            cin >> upi_id;
-            cout << "Enter PIN" <<endl;
-            cin >> pin;
-        }
-        void cash(){
-            cout << "Please give Chnages: " << endl;
-        }
-        void card(){
-            cout << "Enter Your Card Num,ber" << endl;
-            cin >> upi_id;
-        }
-        void make_payment(){
-            cout << "" << endl;
-        }
-
-    };
-
 
 
     int main(){
@@ -366,7 +452,6 @@ class Payment{
         else if (choice == 4){
             break;
         }
-    
-    }
 
+    }
 }
