@@ -1,4 +1,6 @@
-Name = Deepanshu
-Product = 11
-Product = 21
-Total Price = 70
+_________________Dev Billing System_________________
+                        BILL                        
+                                                    
+SR.NO    PRODUCT NAME   QUN.    Net.RATE  ToTal RATE
+1        milk
+2        milk
