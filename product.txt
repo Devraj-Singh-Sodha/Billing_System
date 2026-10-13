@@ -30,3 +30,15 @@
 1 | milk | $10
 1 | milk | $8
 2 | handwash | $9
+1 | wef | $234
+2 | asad | $234
+1 | wf | $23
+2 | ed | $23
+1 | rfsd | $324
+2 | ergsd | $234
+1 | milk | $10
+2 | bread | $20
+1 | milk | $10
+1 | milk | $10
+1 | milk | $10
+2 | bread | $10

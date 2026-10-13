@@ -76,7 +76,7 @@ class Payment : public Upi , Card{
     double amount;
         void getMethod(double amount){
             int choice;
-            int value;
+            double value;
             this->amount = amount;
             cout << "1. CASH: " << endl
                  << "2. UPI:  " << endl
@@ -131,7 +131,6 @@ class Product{
             data_product << Id << " | " << name << " | $" << price << endl;
         }
         void display(){
-            cout << "\nID   Name   Price   Quantity" << endl;
             cout << Id << "    " << name
                 << "    $" << price
                 << "      " << quantity << endl;
@@ -178,8 +177,8 @@ class Billing{
 
 
     public:
-        void generate_bill(vector<Product> Products, bool is_Customer, string name){
-            vector<int> arr;
+        void generate_bill(vector<Product> &Products, bool is_Customer, string name){
+            vector<pair<int, int>> arr;
             int quantity;
             int id;
             this->name = name;
@@ -196,46 +195,46 @@ class Billing{
                 int ans;
                 cout << "Enter product id : ";
                 cin >> ans;
-                cout << "Enter Quantity: " ;
-                cin >> quantity;
-
-                for(auto it : Products){
-                    if (ans == it.Id)
-                    {
-                        if (quantity > it.quantity)
-                        {
-                            cout << "We Dont Have This Much Quantity" << endl;
-                        }
-                    }
-
-                }
-
                 
-                cout << "For Exit (00)"<<endl;
-
                 if (ans == 00)
                 {
                     break;
                 }
-
+                
                 else{
-
-                    arr.push_back(ans);
+                    cout << "Enter Quantity: " ;
+                    cin >> quantity;
+                    for(auto &it : Products){
+                        if (ans == it.Id)
+                        {
+                            if (quantity > it.quantity)
+                            {
+                                cout << "We Dont Have This Much Quantity" << endl;
+                            }
+                            else{
+                                it.quantity -= quantity;
+                                arr.push_back({ans, quantity});
+                            }
+                        }
+    
+                    }
                 }
+                cout << "For Exit (00)"<<endl;
+
 
             }
 
             double total = 0;
 
-            for(auto it : arr){
-                for(auto itt : Products){
-                    if (it == itt.Id)
-                    {
-                        total += itt.price;
+            for (auto item : arr) {
+                for (auto& product : Products) {
+                    if (item.first == product.Id) {
+                        total += product.price * item.second;
+                        break;
                     }
-                    
                 }
             }
+            
             if (is_Customer)
             {
                 total = total * 0.20;
@@ -253,7 +252,7 @@ class Billing{
 
             for (int i = 0; i < arr.size(); i++)
             {
-                order << "Product = " << (i + 1) << arr[i] << endl;
+                order << "Product = " << (i + 1)<< endl;
             }
                   
             order<< "Total Price = " << total;
@@ -377,6 +376,8 @@ class Billing{
                     cout << endl;
                 }
                 else if (choice == 4){
+                    cout << "\nID   Name   Price   Quantity" << endl;
+
                     for (auto &it : Products){
                         it.display();
                     }
@@ -471,6 +472,7 @@ class Billing{
             }
             else
             {
+                cout << "\nID   Name   Price   Quantity" << endl;
                 for (auto &it : Products){
                         it.display();
                 }
