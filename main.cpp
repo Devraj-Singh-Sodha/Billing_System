@@ -37,8 +37,6 @@ class Card{
         
     }
 };
-
-
 class Upi{
     public:
 
@@ -70,11 +68,10 @@ class Upi{
         
     }
 };
-
 class Payment : public Upi , Card{
     public:
     double amount;
-        void getMethod(double amount){
+        int getMethod(double amount){
             int choice;
             double value;
             this->amount = amount;
@@ -112,6 +109,7 @@ class Payment : public Upi , Card{
             else{
                 cout << "Invalid choice : " << endl;
             }
+            return choice;
         }
         
 
@@ -182,7 +180,7 @@ class Billing{
             int quantity;
             int id;
             this->name = name;
-
+            int meth;
             ofstream order("Ordeer.txt");
             if (!is_Customer)
             {
@@ -244,21 +242,41 @@ class Billing{
             {
                 total = total * 0.70;
             }
-
+            
             cout << "Your Total Is :" << total << endl;
             cout << "Thank You For Purchasing...." << endl;
-            
-            order << "Name = " << name << endl;
-
-            for (int i = 0; i < arr.size(); i++)
-            {
-                order << "Product = " << (i + 1)<< endl;
-            }
-                  
-            order<< "Total Price = " << total;
-
             Payment payment;
-            payment.getMethod(total);
+            meth = payment.getMethod(total);
+
+            
+            // order << "Name = " << name << endl;
+            // for (int i = 0; i < arr.size(); i++)
+            // {
+            //     order << "Product = " << (i + 1) << arr[i] << endl;
+            // }
+            int i = 1;
+                  
+
+            order << "_________________Dev Billing System_________________" << endl
+                  << "                        BILL                        " << endl
+                  << "                                                    " << endl
+                  << "SR.NO    PRODUCT NAME   QUN.    Net.RATE  ToTal RATE" << endl;
+
+            for (int i = 1; i < arr.size(); i++)
+            {
+                for(auto it : Products){
+                    
+                    if (it.Id == arr[i].first)
+                    {
+                        order  << i << "        " << it.name  << endl;
+                    }
+                    
+                }
+                
+            }
+            
+
+            
             
 
         }

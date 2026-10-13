@@ -1,3 +1,4 @@
-Name = dev
-Product = 1
-Total Price = 30
+_________________Dev Billing System_________________
+                        BILL                        
+                                                    
+SR.NO    PRODUCT NAME   QUN.    Net.RATE  ToTal RATE
