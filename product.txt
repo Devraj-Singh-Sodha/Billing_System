@@ -22,3 +22,11 @@
 1 | qwe | $1
 1 | devendra | $67
 1 | milk | $50
+1 | milk | $20
+1 | milk | $20
+1 | milk | $10
+1 | milk | $10
+1 | milk | $10
+1 | milk | $10
+1 | milk | $8
+2 | handwash | $9

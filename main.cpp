@@ -121,15 +121,20 @@ class Product{
         string name;
         double price;
         int Id;
-        Product(int Id, string name, double price){
+        int quantity;
+        Product(int Id, string name, double price, int quantity){
             this->Id = Id;
-            this->name = name;
+            this->name = name;  
             this->price = price;
+            this->quantity = quantity;
+
             data_product << Id << " | " << name << " | $" << price << endl;
         }
         void display(){
-            cout << Id << " | " << name
-                << " | $" << price << endl;
+            cout << "\nID   Name   Price   Quantity" << endl;
+            cout << Id << "    " << name
+                << "    $" << price
+                << "      " << quantity << endl;
         }
         void update(string name, double price){
             this->name = name;
@@ -175,7 +180,10 @@ class Billing{
     public:
         void generate_bill(vector<Product> Products, bool is_Customer, string name){
             vector<int> arr;
+            int quantity;
+            int id;
             this->name = name;
+
             ofstream order("Ordeer.txt");
             if (!is_Customer)
             {
@@ -187,17 +195,34 @@ class Billing{
             {
                 int ans;
                 cout << "Enter product id : ";
-                cout << "For Exit (00)"<<endl;
                 cin >> ans;
+                cout << "Enter Quantity: " ;
+                cin >> quantity;
+
+                for(auto it : Products){
+                    if (ans == it.Id)
+                    {
+                        if (quantity > it.quantity)
+                        {
+                            cout << "We Dont Have This Much Quantity" << endl;
+                        }
+                    }
+
+                }
+
+                
+                cout << "For Exit (00)"<<endl;
 
                 if (ans == 00)
                 {
                     break;
                 }
+
                 else{
 
                     arr.push_back(ans);
                 }
+
             }
 
             double total = 0;
@@ -213,7 +238,7 @@ class Billing{
             }
             if (is_Customer)
             {
-                total = total * 0.80;
+                total = total * 0.20;
             }
             
             if (total > 50)
@@ -225,6 +250,7 @@ class Billing{
             cout << "Thank You For Purchasing...." << endl;
             
             order << "Name = " << name << endl;
+
             for (int i = 0; i < arr.size(); i++)
             {
                 order << "Product = " << (i + 1) << arr[i] << endl;
@@ -235,7 +261,9 @@ class Billing{
             Payment payment;
             payment.getMethod(total);
             
+
         }
+
 };
 
 
@@ -272,13 +300,16 @@ class Billing{
                 {
                     string name;
                     double price;
+                    int quantity;
 
                     cout << "Enter Product Name ";
                     cin >> name;
                     cout << "Enter Product Price: ";
                     cin >> price;
+                    cout << "Enter Product quantity: ";
+                    cin >> quantity;
 
-                    Products.push_back(Product(count++, name, price));
+                    Products.push_back(Product(count++, name, price, quantity));
                     cout << endl;
                 }
                 else if (choice == 2){
@@ -358,6 +389,7 @@ class Billing{
                 
             }
         }
+
         else if (choice == 2)
         {
             while (true)
@@ -375,6 +407,7 @@ class Billing{
                     customer.add_customer();
                     Customers.push_back(customer);
                 }
+
                 else if (choice == 2)
                 {
                     int id;

@@ -1,4 +1,3 @@
-Name = Deepanshu
+Name = deep
 Product = 11
-Product = 21
-Total Price = 70
+Product = 22
